@@ -1,3 +1,15 @@
+int pir=D1;
+
+#include <ESP8266WiFi.h>
+#include "ThingSpeak.h"
+ 
+const char* ssid     = "----------";  //name of the wifi
+const char* password = "-------";     //Password of the wifi
+unsigned long myChannelNumber = ------; // get channel no from thingspeak
+const char * myWriteAPIKey = "--------------";   //get writeApi key from thingspeak
+ 
+WiFiClient WiFiclient;
+
 void setup() {
 pinMode(D1, INPUT);
   Serial.begin(115200);
