@@ -1,0 +1,36 @@
+void setup() {
+pinMode(D1, INPUT);
+  Serial.begin(115200);
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+   delay(500);
+   Serial.print(".");
+  }
+  Serial.println("");
+  Serial.println("WiFi connected");  
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+  ThingSpeak.begin(WiFiclient);
+}
+ 
+void loop() {
+ 
+  int motion=digitalRead(pir);
+ Serial.println(motion);
+  if(motion==HIGH){
+  Serial.println("Motion detected");
+    ThingSpeak.setField(1,5);
+  ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
+  delay(17000);
+    
+  }
+  else
+  {Serial.println("Motion not detected");
+    ThingSpeak.setField(1,0);
+    ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
+    delay(17000);
+  }
+  
+}
